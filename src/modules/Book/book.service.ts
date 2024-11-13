@@ -9,6 +9,16 @@ const createBookIntoDB = async (data: any) => {
     totalCopies: data.totalCopies,
     availableCopies: data.availableCopies,
   };
+
+  // const isExistBook = await prisma.book.findUnique({
+  //   where: {
+  //     title: bookData?.title,
+  //   },
+  // });
+  // if (isExistBook) {
+  //   return { message: 'Book already exists', book: isExistBook };
+  // }
+
   const result = await prisma.book.create({
     data: bookData,
   });
@@ -37,9 +47,19 @@ const updateBookIntoDB = async (bookId: string, bookData: Partial<Book>) => {
   return result;
 };
 
+const deleteBookFromDB = async (bookId: string) => {
+  const result = await prisma.book.delete({
+    where: {
+      bookId,
+    },
+  });
+  return result;
+};
+
 export const BookServices = {
   createBookIntoDB,
   getAllBooksFromDB,
   getSingleBookFromDB,
   updateBookIntoDB,
+  deleteBookFromDB,
 };

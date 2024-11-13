@@ -3,7 +3,6 @@ import { BookServices } from './book.service';
 
 const createBook = asyncHandler(async (req, res) => {
   const bookData = req.body;
-
   const result = await BookServices.createBookIntoDB(bookData);
 
   res.status(201).json({
@@ -35,6 +34,7 @@ const getSingleBook = asyncHandler(async (req, res) => {
     data: result,
   });
 });
+
 const updateSingleBook = asyncHandler(async (req, res) => {
   const { bookId } = req.params;
   const bookData = req.body;
@@ -47,10 +47,22 @@ const updateSingleBook = asyncHandler(async (req, res) => {
     data: result,
   });
 });
+const deleteBook = asyncHandler(async (req, res) => {
+  const { bookId } = req.params;
+
+  const result = await BookServices.deleteBookFromDB(bookId);
+  res.status(200).json({
+    success: true,
+    status: 200,
+    message: 'Book deleted successfully',
+    // data: result,
+  });
+});
 
 export const BookControllers = {
   createBook,
   getAllBooks,
   getSingleBook,
   updateSingleBook,
+  deleteBook,
 };
