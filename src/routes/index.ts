@@ -9,7 +9,7 @@ const moduleRoutes = [
     route: bookRoutes,
   },
   {
-    path: '/member',
+    path: '/members',
     route: memberRoutes,
   },
 ];

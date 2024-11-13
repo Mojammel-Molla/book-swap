@@ -13,6 +13,17 @@ const createMember = asyncHandler(async (req, res) => {
   });
 });
 
+const getAllMembers = asyncHandler(async (req, res) => {
+  const result = await MemberServices.getAllMembersFromDB();
+  res.status(200).json({
+    success: true,
+    status: 200,
+    message: 'Members retrieved successfully',
+    data: result,
+  });
+});
+
 export const MemberControllers = {
   createMember,
+  getAllMembers,
 };
