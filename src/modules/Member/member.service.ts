@@ -1,3 +1,4 @@
+import { Member } from '@prisma/client';
 import { prisma } from '../../shared/prisma';
 
 const createMemberIntoDB = async (data: any) => {
@@ -26,8 +27,22 @@ const getSingleMemberFromDB = async (memberId: string) => {
   });
   return result;
 };
+
+const updateMemberIntoDB = async (
+  memberId: string,
+  memberData: Partial<Member>
+) => {
+  const result = await prisma.member.update({
+    where: {
+      memberId,
+    },
+    data: memberData,
+  });
+  return result;
+};
 export const MemberServices = {
   createMemberIntoDB,
   getAllMembersFromDB,
   getSingleMemberFromDB,
+  updateMemberIntoDB,
 };

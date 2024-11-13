@@ -35,8 +35,22 @@ const getSingleMember = asyncHandler(async (req, res) => {
   });
 });
 
+const updateSingleMember = asyncHandler(async (req, res) => {
+  const { memberId } = req.params;
+  const memberData = req.body;
+
+  const result = await MemberServices.updateMemberIntoDB(memberId, memberData);
+  res.status(200).json({
+    success: true,
+    status: 200,
+    message: 'Member update successfully',
+    data: result,
+  });
+});
+
 export const MemberControllers = {
   createMember,
   getAllMembers,
   getSingleMember,
+  updateSingleMember,
 };
