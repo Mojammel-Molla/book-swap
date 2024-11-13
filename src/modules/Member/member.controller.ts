@@ -48,9 +48,22 @@ const updateSingleMember = asyncHandler(async (req, res) => {
   });
 });
 
+const deleteMember = asyncHandler(async (req, res) => {
+  const { memberId } = req.params;
+
+  const result = await MemberServices.deleteMemberFromDB(memberId);
+  res.status(200).json({
+    success: true,
+    status: 200,
+    message: 'Member deleted successfully',
+    // data: result,
+  });
+});
+
 export const MemberControllers = {
   createMember,
   getAllMembers,
   getSingleMember,
   updateSingleMember,
+  deleteMember,
 };

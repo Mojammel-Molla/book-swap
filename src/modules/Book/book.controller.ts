@@ -47,6 +47,7 @@ const updateSingleBook = asyncHandler(async (req, res) => {
     data: result,
   });
 });
+
 const deleteBook = asyncHandler(async (req, res) => {
   const { bookId } = req.params;
 
