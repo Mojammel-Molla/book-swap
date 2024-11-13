@@ -22,9 +22,9 @@ model Book {
   publishedYear Int
   totalCopies Int
   availableCopies Int
+  borrowRecord BorrowRecord?
 
   @@map("books")
-  BorrowRecord BorrowRecord[]
 }
 
 model Member{
@@ -33,7 +33,7 @@ model Member{
   email String
   phone String
   membershipDate DateTime
-  BorrowRecord BorrowRecord[]
+  borrowRecord BorrowRecord?
 
   @@map("members")
 }
@@ -41,9 +41,9 @@ model Member{
 model BorrowRecord{
   borrowId String @id @default(uuid())
   borrowDate DateTime 
-  retrunDate DateTime
-  bookId String  
-  memberId String
+  returnDate DateTime
+  bookId String   @unique
+  memberId String @unique
 
   @@map("borrow_records")
   book   Book  @relation(fields: [bookId], references: [bookId])
