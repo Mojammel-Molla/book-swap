@@ -23,7 +23,20 @@ const getAllMembers = asyncHandler(async (req, res) => {
   });
 });
 
+const getSingleMember = asyncHandler(async (req, res) => {
+  const { memberId } = req.params;
+
+  const result = await MemberServices.getSingleMemberFromDB(memberId);
+  res.status(200).json({
+    success: true,
+    status: 200,
+    message: 'Member retrieved successfully',
+    data: result,
+  });
+});
+
 export const MemberControllers = {
   createMember,
   getAllMembers,
+  getSingleMember,
 };

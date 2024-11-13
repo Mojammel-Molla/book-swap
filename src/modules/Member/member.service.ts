@@ -18,7 +18,16 @@ const getAllMembersFromDB = async () => {
   return result;
 };
 
+const getSingleMemberFromDB = async (memberId: string) => {
+  const result = await prisma.member.findUnique({
+    where: {
+      memberId,
+    },
+  });
+  return result;
+};
 export const MemberServices = {
   createMemberIntoDB,
   getAllMembersFromDB,
+  getSingleMemberFromDB,
 };
