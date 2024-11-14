@@ -1,6 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import { MemberServices } from './member.service';
-const createMember = asyncHandler(async (req, res) => {
+import catchAsync from '../../shared/catchAsync';
+import { RequestHandler } from 'express';
+const createMember: RequestHandler = catchAsync(async (req, res) => {
   const memberData = req.body;
 
   const result = await MemberServices.createMemberIntoDB(memberData);
@@ -13,7 +15,7 @@ const createMember = asyncHandler(async (req, res) => {
   });
 });
 
-const getAllMembers = asyncHandler(async (req, res) => {
+const getAllMembers: RequestHandler = catchAsync(async (req, res) => {
   const result = await MemberServices.getAllMembersFromDB();
   res.status(200).json({
     success: true,
@@ -23,7 +25,7 @@ const getAllMembers = asyncHandler(async (req, res) => {
   });
 });
 
-const getSingleMember = asyncHandler(async (req, res) => {
+const getSingleMember: RequestHandler = catchAsync(async (req, res) => {
   const { memberId } = req.params;
 
   const result = await MemberServices.getSingleMemberFromDB(memberId);
@@ -35,7 +37,7 @@ const getSingleMember = asyncHandler(async (req, res) => {
   });
 });
 
-const updateSingleMember = asyncHandler(async (req, res) => {
+const updateSingleMember: RequestHandler = catchAsync(async (req, res) => {
   const { memberId } = req.params;
   const memberData = req.body;
 
@@ -48,7 +50,7 @@ const updateSingleMember = asyncHandler(async (req, res) => {
   });
 });
 
-const deleteMember = asyncHandler(async (req, res) => {
+const deleteMember: RequestHandler = catchAsync(async (req, res) => {
   const { memberId } = req.params;
 
   const result = await MemberServices.deleteMemberFromDB(memberId);

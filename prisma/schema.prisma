@@ -42,7 +42,7 @@ model BorrowRecord{
   borrowId String @id @default(uuid())
   borrowDate DateTime 
   returnDate DateTime
-  bookId String   @unique
+  bookId String    @unique
   memberId String @unique
 
   @@map("borrow_records")

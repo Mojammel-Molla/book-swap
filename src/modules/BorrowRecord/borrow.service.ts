@@ -19,7 +19,17 @@ const getAllBorrowsFromDB = async () => {
   return result;
 };
 
+const getReturnBorrowFromDB = async (borrowId: string) => {
+  const result = await prisma.borrowRecord.findUnique({
+    where: {
+      borrowId,
+    },
+  });
+  return result;
+};
+
 export const BorrowServices = {
   createBorrowIntoDB,
   getAllBorrowsFromDB,
+  getReturnBorrowFromDB,
 };
